@@ -79,22 +79,4 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
-
-  describe 'icons' do
-    context 'concrete icon' do
-      it 'returns content tag' do
-        expect(coreui_icon_l('boh')).to eq '<i class="cil-boh"></i>'
-      end
-    end
-    context 'icon with extra attributes' do
-      it 'returns content tag' do
-        expect(coreui_icon_l('boh', id: 'extra')).to eq '<i id="extra" class="cil-boh"></i>'
-      end
-    end
-    context 'icon by model' do
-      it 'returns concrete icon' do
-        expect(icon_by_model(:user, class: 'foo')).to eq '<i class="cil-user-female foo"></i>'
-      end
-    end
-  end
 end

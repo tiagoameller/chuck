@@ -56,6 +56,10 @@ es:
   errors:
     dashboard:
       update: Error actualizando la estadística
+    messages:
+      not_saved:
+        one: 'Hay un error en el formulario, revise los datos:'
+        other: 'Hay %{count} errores en el formulario, revise los datos:'
   flash:
     alert: Atención
     error: "¡Error!"

@@ -7,31 +7,11 @@
 
     li.c-sidebar-nav-title
       = t('left_sidebar.files')
-    li.c-sidebar-nav-item
-    - if policy(:user).index?
-      li.c-sidebar-nav-item
-        = link_to admin_users_path, class: "c-sidebar-nav-link #{'c-active' if controller_name == 'users'}" do
-          = icon_by_model(:user, class: 'c-sidebar-nav-icon')
-          = User.model_name.human(count: :many)
-
-    - if current_user.at_least_admin?
-      li.c-sidebar-nav-title
-        = t('left_sidebar.admin')
-      - if policy(:company).show?
-        li.c-sidebar-nav-item
-          - if policy(:company).index?
-            = link_to admin_companies_path, class: "c-sidebar-nav-link #{'c-active' if controller_name == 'companies'}" do
-              = icon_by_model(:company, class: 'c-sidebar-nav-icon')
-              = Company.model_name.human(count: :many)
-          - else
-            = link_to admin_company_path(current_company), class: "c-sidebar-nav-link #{'c-active' if controller_name == 'companies'}" do
-              = icon_by_model(:company, class: 'c-sidebar-nav-icon')
-              = Company.model_name.human(count: 1)
 
     li.c-sidebar-nav-title
       = t 'left_sidebar.about'
     li.c-sidebar-nav-item
-      a.c-sidebar-nav-link target='_blank' rel="noopener" href="mailto:#{SUPPORT_EMAIL}?subject=#{'Consulta técnica'.html_safe}&body=#{current_company.name+'. '+current_user.name.full.html_safe}"
+      a.c-sidebar-nav-link target='_blank' rel="noopener" href="mailto:#{SUPPORT_EMAIL}"
         = coreui_icon_l('envelope-closed', class: 'c-sidebar-nav-icon')
         = t 'left_sidebar.support'
     - if TWITTER_URL.present?
@@ -39,11 +19,6 @@
         = link_to TWITTER_URL, class: 'c-sidebar-nav-link', target: '_blank', rel: 'noopener noreferrer' do
           = coreui_icon_b('twitter', class: 'c-sidebar-nav-icon')
           | Twitter
-    - if policy(:user).pricing?
-      li.c-sidebar-nav-item
-        = link_to page_path(:pricing), class: 'c-sidebar-nav-link' do
-          = coreui_icon_l('wallet', class: 'c-sidebar-nav-icon')
-          = t('pricing.title')
     li.c-sidebar-nav-item
       a.c-sidebar-nav-link.disabled
         = coreui_icon_b('github', class: 'c-sidebar-nav-icon')

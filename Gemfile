@@ -55,8 +55,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rails-i18n'
-gem 'devise'
-gem 'devise-i18n'
 gem 'friendly_id'
 gem 'kaminari'
 gem 'local_time'
@@ -68,7 +66,6 @@ gem 'name_of_person'
 gem 'gravtastic'
 gem 'high_voltage'
 gem 'semver2'
-gem 'pundit'
 gem 'enum_help'
 gem 'i18n-js'
 gem 'amazing_print'

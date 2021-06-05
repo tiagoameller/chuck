@@ -1,9 +1,5 @@
 module ApplicationHelper
   include ActionView::Helpers::NumberHelper
-  def current_company
-    controller.current_company!
-  end
-
   def present(model, presenter_class = nil)
     klass = presenter_class || "#{model.class}Presenter".constantize
     presenter = klass.new(model, self)
@@ -93,16 +89,12 @@ module ApplicationHelper
     end
   end
 
-  def icon_by_status(status, options = {})
-    coreui_icon_l(ICONS[status], options) if ICONS.include? status
-  end
-
   def icon_by_model(model, options = {})
     result =
       case model.to_s
-      when 'company'
+      when 'question'
         'briefcase'
-      when 'user'
+      when 'answer'
         'user-female'
       else
         '3d'

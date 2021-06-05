@@ -10,7 +10,6 @@ SimpleCov.start 'rails' do
   end
   # add my onw tabs in report
   add_group 'Datatables', 'app/datatables'
-  add_group 'Policies', 'app/policies'
   add_group 'Presenters', 'app/presenters'
 end
 
@@ -21,9 +20,6 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-require 'devise'
-require_relative './support/controller_macros'
-require_relative './support/feature_macros'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'action_mailer'
@@ -95,8 +91,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::Test::ControllerHelpers, type: :view
   config.include ControllerMacros, type: :controller
   config.include FeatureMacros, type: :feature
 end

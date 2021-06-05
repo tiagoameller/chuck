@@ -4,8 +4,6 @@ class ApplicationDatatable
   delegate :mail_to, to: :@view
   delegate :content_tag, to: :@view
   delegate :present, to: :@view
-  delegate :current_company, to: :@view
-  delegate :current_user, to: :@view
   delegate :coreui_icon_l, to: :@view
   delegate :distance_of_time_in_words, to: :@view
 

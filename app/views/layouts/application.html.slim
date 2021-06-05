@@ -38,41 +38,27 @@ HTML[lang="#{I18n.default_locale}"]
       I18n.defaultLocale = "#{I18n.default_locale}";
       I18n.locale = "#{I18n.locale}";
 
-    / - if Rails.env.production?
-    /   script [async src="https://www.googletagmanager.com/gtag/js?id=UA-120139748-3"]
+    = content_tag(\
+      :body, \
+      class: 'c-app', \
+      data: { \
+        action: action_name, \
+        env: Rails.env, \
+        controller: "shared--loader #{controller_name} #{controller_name}--#{controller_name} audits--last" \
+      }\
+    ) do
+      = render 'layouts/navigation/left_sidebar'
+      .c-wrapper
+        = render 'layouts/navigation/header'
+        .c-body data-action="click->shared--loader#closeRightSidebar"
+          - if flash.any?
+            / sample of use with options
+            / = toast_messages position: '"bottomRight"'
+            = toast_messages
 
-      / javascript:
-      /   window.dataLayer = window.dataLayer || [];
-      /     function gtag(){dataLayer.push(arguments);}
-      /     gtag('js', new Date());
-
-      /     gtag('config', 'UA-120139748-3');
-
-      / script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
-      / javascript:
-      /   window.cookieconsent.initialise({
-      /     "palette": {
-      /       "popup": {
-      /         "background": "#237afc"
-      /       },
-      /       "button": {
-      /         "background": "#fff",
-      /         "text": "#237afc"
-      /       }
-      /     },
-      /     "position": "bottom-left",
-      /     "content": {
-      /       "message": I18n.t('frontend.cookies.message'),
-      /       "dismiss": I18n.t('frontend.cookies.dismiss'),
-      /       "link": I18n.t('frontend.cookies.link'),
-      /       "href": document.body.dataset.cookiesPath
-      /     }
-      /   })
-
-  - if user_signed_in?
-    = render 'layouts/logged'
-  - else
-    = render 'layouts/not_logged'
-
+          main.c-main
+            = yield
+        = render 'layouts/navigation/footer'
+      #remote_container
 
 

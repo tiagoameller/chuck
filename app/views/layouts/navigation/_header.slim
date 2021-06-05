@@ -4,13 +4,13 @@ header.c-header.c-header-light.c-header-fixed
       use[xlink:href="#{image_path('svg/free.svg')}#cil-menu"]
 
   = link_to(\
-    current_company.full_name, \
+    APP_NAME, \
     root_path, \
     class: 'c-header-brand c-header-brand-lg-up-center d-md-down-none h3'\
   )
 
   = link_to(\
-    current_company.nick,\
+    APP_NAME,\
     root_path,\
     class: 'c-header-brand d-lg-none c-header-brand-sm-up-center text-uppercase h3'\
   )
@@ -34,31 +34,20 @@ header.c-header.c-header-light.c-header-fixed
     li.c-header-nav-item.dropdown
       a.c-header-nav-link[data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"]
         .c-avatar.mr-1.d-md-down-none
-          img.c-avatar-img[src="#{current_user.gravatar_url}" alt="#{current_user.email}"]
-        span = current_user.loginname
+        /   img.c-avatar-img[src="#{current_user.gravatar_url}" alt="#{current_user.email}"]
+        / span = current_user.loginname
       .dropdown-menu.dropdown-menu-right.pt-0
         .dropdown-header.text-center.text-uppercase
-          = current_user.role_i18n
+          / = current_user.role_i18n
         .dropdown-divider
-        - if policy(:company).show?
-          = link_to(admin_company_path(current_company), class: 'dropdown-item')
-            .text-capitalize
-              = icon_by_model :company
-              =< t 'attributes.company'
-        = link_to(edit_user_registration_path, class: 'dropdown-item')
-          = coreui_icon_l 'user-female'
-          =< t 'common.profile'
-        = link_to(destroy_user_session_path, method: :delete, class: 'dropdown-item', data: { confirm: t('common.are_you_sure'), disable_with: '...' }) do
-          = coreui_icon_l 'lock-locked'
-          =< t 'common.logout'
 
     / activate right side bar if needed
-    button.c-header-toggler.c-class-toggler.mfe-md-3[
-      type="button"
-      data-target="#audit-sidebar"
-      data-class="c-sidebar-show"
-      data-action="click->audits--last#lastAudits"
-    ]
-      = coreui_icon_l('history', class: 'c-icon c-icon-lg')
+    / button.c-header-toggler.c-class-toggler.mfe-md-3[
+    /   type="button"
+    /   data-target="#audit-sidebar"
+    /   data-class="c-sidebar-show"
+    /   data-action="click->audits--last#lastAudits"
+    / ]
+    /   = coreui_icon_l('history', class: 'c-icon c-icon-lg')
 
   = render 'layouts/navigation/subheader'

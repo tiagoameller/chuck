@@ -1,0 +1,35 @@
+/ partial used for _show (remote: true) and show (remote: false)
+/ @called_html must be defined
+- present(@question) do |question|
+  div class="card card-accent-#{class_by_action} mb-0"
+    .card-header
+      h3.card-title
+        = icon_by_model(:question)
+        =< Question.model_name.human(count: 1) + ': ' + question.full_name
+      .small
+        = t('question.made_at', when: question.created_at_formatted, answers: question.answer_count)
+        = render 'partials/dismiss_modal'
+    .card-body
+      - question.answers.each_with_index do |an_answer, idx|
+        - present(an_answer) do |answer|
+          .card
+            .card-body.p-1.d-flex.align-items-center
+              .bg-gradient-primary.p-3.mfe-3
+                i.c-icon.c-icon-xl.cil-settings
+              ul.list-unstyled
+                li.text-value.text-primary
+                  = answer.value
+                li.text-muted.small
+                  = link_to t('answer.source'), answer.url, target: '_blank', rel: 'noopener noreferrer'
+                - if answer.categories_array.any?
+                  li
+                    - answer.categories_array.each_with_index do |category, idx|
+                      span.badge.badge-info.mr-1
+                        = category
+                      - break if idx == 5
+
+
+        - break if idx == 2
+
+    .card-footer
+      == render 'form_footer_buttons'

@@ -4,6 +4,8 @@ es:
     create: creado
     destroy: borrado
     update: modificado
+  answer:
+    source: Ir a la fuente
   audit:
     no_activity: Sin actividad
     one: Evento
@@ -90,6 +92,11 @@ es:
     title: Plan de precios
   privacy:
     privacy: Privacidad
+  question:
+    by_category: Por categoría '%{category}'
+    by_random: Aleatorio
+    by_word: Por texto '%{word}
+    made_at: Realizada en %{when} con %{answers} respuestas
   registrations:
     edit:
       hints:
@@ -108,7 +115,7 @@ es:
       register_new_user: Darse de alta como usuario
   report:
     date_range: Desde / Hasta Fecha
-    kind: Tipo
+    kind: Tipo'
     report: Informes
     select: Seleccionar condiciones
     submit: Generar

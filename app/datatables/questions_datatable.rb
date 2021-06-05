@@ -28,7 +28,7 @@ class QuestionsDatatable < ApplicationDatatable
   end
 
   def total_entries
-    questions.total_count
+    questions.count
   end
 
   def questions

@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit]
+  before_action :set_question, only: [:show]
 
   def index
     respond_to do |format|

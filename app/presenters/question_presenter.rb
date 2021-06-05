@@ -1,0 +1,2 @@
+class QuestionPresenter < ApplicationPresenter
+end

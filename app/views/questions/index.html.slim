@@ -1,0 +1,35 @@
+- content_for :head do
+  / avoid reloading when questions moves back and forth (because turbolinks)
+  meta[name="turbolinks-cache-control" content="no-cache"]
+
+.container-fluid [data-controller="questions--index"]
+  .animated.fade-in
+    .card.card-accent-primary
+      .card-header
+        h2
+          = icon_by_model :question
+          =< Question.model_name.human(count: :many)
+          .card-header-actions
+            = link_to(\
+              new_question_path, \
+              id: 'new_question_btn', \
+              remote: true, \
+              class: 'btn btn-success'\
+            ) { coreui_icon_l('plus', class: 'font-2xl')}
+      .card-body
+        .row.justify-content-center
+          .col-auto
+            = content_tag( \
+              :table, \
+              id: 'questions_table', \
+              class: 'table table-responsive table-bordered table-hover w-100', \
+              data: { \
+                url: questions_path(format: :json) \
+              } \
+            )
+              thead
+                tr
+                  th.text-capitalize = t('attributes.created_at')
+                  th.text-capitalize = t('attributes.kind')
+                  th.text-capitalize = t('attributes.question')
+                  th.text-capitalize = t('attributes.answer_count')

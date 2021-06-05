@@ -23,11 +23,12 @@ export const DEFAULT_COLUMNDEFS = [
   }
 ]
 
+import { activateTooltips } from "libraries/data-toggles"
 export class DatatableInit {
-  constructor (selector, options, columndefs) {
+  constructor (selector, columndefs, options) {
 
-    if (options == null) { options = DEFAULT_OPTIONS }
     if (columndefs == null) { columndefs = DEFAULT_COLUMNDEFS }
+    if (options == null) { options = DEFAULT_OPTIONS }
 
     const self = this
     this.selector = selector
@@ -53,7 +54,7 @@ export class DatatableInit {
               break
             }
           }
-          return $("[data-toggle=\"c-tooltip\"]").tooltip()
+          activateTooltips ()
         },
         stateSaveCallback (settings, data) {
           return sessionStorage.setItem("DataTables_" + settings.sInstance, JSON.stringify(data))

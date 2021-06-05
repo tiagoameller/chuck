@@ -33,25 +33,6 @@ SimpleForm.setup do |config|
     b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
   end
 
-  config.wrappers :vertical_form_password_view, tag: :div, class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
-    b.use :html5
-    b.use :placeholder
-    b.optional :maxlength
-    b.optional :minlength
-    b.optional :pattern
-    b.optional :min_max
-    b.optional :readonly
-    b.use :label, class: 'form-control-label capitalize-first-word', error_class: 'is-invalid', valid_class: 'my-is-valid'
-    b.wrapper :vertical_form_password, tag: :div, class: 'input-group' do |ig|
-      ig.use :input, class: 'form-control', error_class: 'is-invalid', valid_class: 'my-is-valid'
-      ig.wrapper :div, class: 'input-group-append' do |ig_append|
-        ig_append.optional :show_password_eye # declared at lib/components/simple_form/show_password_eye.rb
-      end
-    end
-    b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
-    b.use :hint, wrap_with: { tag: 'small', class: 'form-text text-muted' }
-  end
-
   config.wrappers :vertical_form_cocoon_field, tag: :div, class: 'input-group', error_class: 'input-group-invalid', valid_class: 'input-group-valid' do |b|
     b.use :html5
     b.use :placeholder

@@ -42,9 +42,4 @@ export default class extends ApplicationController {
     }
   }
 
-  closeRightSidebar () {
-    // sometimes coreui class toggler don't work. force to close right side bar when clicking to body
-    this.rightSidebarTarget.classList.remove("c-sidebar-show")
-  }
-
 }

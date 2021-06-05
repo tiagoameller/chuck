@@ -112,7 +112,6 @@ end
 
 group :test do
   gem 'capybara-screenshot'
-  gem 'selenium-webdriver'
   gem 'fuubar'
   gem 'simplecov', require: false
   gem 'apparition'

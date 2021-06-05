@@ -93,7 +93,7 @@ module ApplicationHelper
     result =
       case model.to_s
       when 'question'
-        'briefcase'
+        'comment-bubble-question'
       when 'answer'
         'user-female'
       else

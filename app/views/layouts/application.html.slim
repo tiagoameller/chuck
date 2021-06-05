@@ -50,7 +50,7 @@ HTML[lang="#{I18n.default_locale}"]
       = render 'layouts/navigation/left_sidebar'
       .c-wrapper
         = render 'layouts/navigation/header'
-        .c-body data-action="click->shared--loader#closeRightSidebar"
+        .c-body
           - if flash.any?
             / sample of use with options
             / = toast_messages position: '"bottomRight"'

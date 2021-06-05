@@ -1,0 +1,9 @@
+$("#company_form").modal("hide")
+window.location.href = "<%= new_user_session_path %>"
+
+App.common_controller.toast(
+  window.I18n.t("frontend.signup.successful"),
+  window.I18n.t("frontend.signup.check_your_email", {email: "<%= @admin.email %>"}),
+  "success"
+)
+

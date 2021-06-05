@@ -1,0 +1,59 @@
+.form-group
+  label
+    = t('report.date_range')
+  .input-group
+    .input-group-prepend
+      span.input-group-text
+        = coreui_icon_l(:calendar)
+      = content_tag(\
+        :input, \
+        nil, \
+        class: 'form-control float-right active', \
+        id: "#{fieldname}_from_to_date", \
+        type: 'text', \
+        autocomplete: 'off' \
+      )
+      = hidden_field_tag "#{fieldname}_date_start"
+      = hidden_field_tag "#{fieldname}_date_end"
+  = content_tag(:div, id: "#{fieldname}_report_range")
+    span
+
+javascript:
+   $(function () {
+      // Date range picker
+      const DEFAULT_FORMAT = 'ddd, DD/MM/YYYY';
+      const self = this;
+      const INITIAL_START = moment().subtract(1, 'week').startOf('isoWeek');
+      const INITIAL_END = moment().subtract(1, 'week').endOf('isoWeek');
+      display_range(INITIAL_START, INITIAL_END);
+      $("##{fieldname}_from_to_date").daterangepicker(
+        {
+          ranges: {
+            [I18n.t('frontend.daterangepicker.today')]: [moment(), moment()],
+            [I18n.t('frontend.daterangepicker.yesterday')]: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            [I18n.t('frontend.daterangepicker.last_week')]: [INITIAL_START, INITIAL_END],
+            [I18n.t('frontend.daterangepicker.this_month')]: [moment().startOf('month'), moment().endOf('month')],
+            [I18n.t('frontend.daterangepicker.last_month')]: [
+              moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
+            ]
+          },
+          startDate: INITIAL_START,
+          endDate: INITIAL_END,
+          locale: {
+            separator: " - ",
+            format: I18n.t('frontend.daterangepicker.format'),
+            applyLabel: I18n.t('frontend.daterangepicker.applyLabel'),
+            cancelLabel: I18n.t('frontend.daterangepicker.cancelLabel'),
+            fromLabel: I18n.t('frontend.daterangepicker.fromLabel'),
+            toLabel: I18n.t('frontend.daterangepicker.toLabel'),
+            customRangeLabel: I18n.t('frontend.daterangepicker.customRangeLabel')
+          }
+        },
+        function(start, end) { return display_range(start, end, this);
+     });
+     function display_range (start, end, picker) {
+        $("##{fieldname}_report_range span").html(start.format(DEFAULT_FORMAT) + ' - ' + end.format(DEFAULT_FORMAT));
+        $("##{fieldname}_date_start").val(start);
+        return $("##{fieldname}_date_end").val(end);
+      }
+    });

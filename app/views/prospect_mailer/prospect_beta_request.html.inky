@@ -1,0 +1,70 @@
+row
+  columns
+    p
+      | Hola,
+      =< @prospect.username
+    p
+      | Gracias por solicitar acceso a
+      =< link_to "myapp.com", root_url
+      | . En breve crearemos un usuario en la aplicación y le
+      |  indicaremos como acceder y empezar a trabajar.
+      br
+      | Si tiene cualquier duda, puede responder a este email y se la resolveremos.
+    p
+      | Los datos que nos ha facilitado son:
+      ul
+        li
+        | Empresa:
+        strong
+          =< @prospect.company_name
+        li
+          | Ubicación:
+          strong
+            =< @prospect.location
+        li
+          | CIF/NIF:
+          strong
+            =< @prospect.vat_number
+        li
+          | Número de empleados:
+          strong
+            =< @prospect.employee_count
+        li
+          | Usuario administrador:
+          strong
+            =< @prospect.username
+      | Una vez esté creada su empresa en
+      =< link_to "myapp.com", root_url
+      |  podrá modificar estos datos. Y además, podrá:
+      ul
+        li
+          | Configurar sus empleados
+        li
+          | Darles una herramienta móvil para que realicen sus fichajes de entrada y salida, de acuerdo a la normativa
+        li
+          | Tener a disposición de Administración, representantes sindicales y empleados el registro histórico de entradas y salidas
+
+    p style="margin-top: 16px;"
+      strong
+        | Y ¿esto cuánto cuesta?
+      br
+      =< link_to "myapp.com", root_url
+      |  está en beta privada. Esto quiere decir que un reducido grupo de usuarios, al que ahora pertence su empresa, lo están utilizando
+      |  para aportarnos sus ideas de mejora.
+      br
+        strong
+          | Siempre existirá un plan gratuito
+        |  para empresas con hasta 5 usuarios activos, sin límite de usuarios inactivos.
+      br
+      | Para mayor volumen de usuarios, le ofreceremos planes de precios escalados con opción de pago mensual, anual, bienal o único
+      br
+      | No se pierde nada por probar la aplicación. Verá lo fácil de usar que es.
+
+    p
+      | Seguimos en contacto.
+    p
+      | El equipo de
+      =< link_to "myapp.com", root_url
+
+
+

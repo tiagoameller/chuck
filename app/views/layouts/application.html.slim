@@ -1,0 +1,78 @@
+doctype HTML
+HTML[lang="#{I18n.default_locale}"]
+  head
+    title = APP_NAME
+    meta name='description' content="#{t('meta.description')}"
+    meta name='author' content="#{t('meta.author')}"
+    = csrf_meta_tags
+    = render partial: 'partials/favicon'
+    meta[charset="utf-8"]
+    / PWA
+    link[rel="manifest" href="/manifest.json"]
+    meta[name="theme-color" content="#FFFFFF"]
+    / PWA
+    meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
+    meta[http-equiv="x-ua-compatible" content="ie=edge"]
+
+    meta[property="og:title" content="#{t('meta.title')}"]
+    meta[property="og:url" content="#{t('meta.url')}"]
+    meta[property="og:description" content="#{t('meta.description')}"]
+    meta[property="og:site_name" content="#{t('meta.site_name')}"]
+    meta[property="og:image" content="#{image_path('application/logo_512_black.png')}"]
+    meta[property="og:type" content="business.business"]
+    meta[property="business:contact_data:street_address" content="#{t('meta.contact.street_address')}"]
+    meta[property="business:contact_data:locality" content="#{t('meta.contact.locality')}"]
+    meta[property="business:contact_data:region" content="#{t('meta.contact.region')}"]
+    meta[property="business:contact_data:postal_code" content="#{t('meta.contact.postal_code')}"]
+    meta[property="business:contact_data:country_name" content="#{t('meta.contact.country_name')}"]
+
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+    = stylesheet_link_tag href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
+
+    - if content_for? :head
+      = yield :head
+
+    javascript:
+      I18n.defaultLocale = "#{I18n.default_locale}";
+      I18n.locale = "#{I18n.locale}";
+
+    / - if Rails.env.production?
+    /   script [async src="https://www.googletagmanager.com/gtag/js?id=UA-120139748-3"]
+
+      / javascript:
+      /   window.dataLayer = window.dataLayer || [];
+      /     function gtag(){dataLayer.push(arguments);}
+      /     gtag('js', new Date());
+
+      /     gtag('config', 'UA-120139748-3');
+
+      / script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"
+      / javascript:
+      /   window.cookieconsent.initialise({
+      /     "palette": {
+      /       "popup": {
+      /         "background": "#237afc"
+      /       },
+      /       "button": {
+      /         "background": "#fff",
+      /         "text": "#237afc"
+      /       }
+      /     },
+      /     "position": "bottom-left",
+      /     "content": {
+      /       "message": I18n.t('frontend.cookies.message'),
+      /       "dismiss": I18n.t('frontend.cookies.dismiss'),
+      /       "link": I18n.t('frontend.cookies.link'),
+      /       "href": document.body.dataset.cookiesPath
+      /     }
+      /   })
+
+  - if user_signed_in?
+    = render 'layouts/logged'
+  - else
+    = render 'layouts/not_logged'
+
+
+

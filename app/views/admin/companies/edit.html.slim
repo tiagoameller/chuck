@@ -1,0 +1,12 @@
+.container-fluid
+  .animated.fade-in
+    .card.card-accent-warning
+      .card-header
+        h3.card-title
+          = icon_by_model(:company)
+          =< @company.name
+          - if policy(:company).index?
+            = link_to(admin_companies_path, class: 'btn btn-outline-primary float-right') { coreui_icon_l('arrow-thick-left') }
+          - else
+            = link_to(root_path, class: 'btn btn-outline-primary float-right') { coreui_icon_l('arrow-thick-left') }
+      == render 'form'

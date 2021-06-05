@@ -1,0 +1,58 @@
+row
+  columns
+    p
+      | Hola,
+      =< @company.admin_name
+      |  de
+      strong
+        =< @company.name
+
+    p
+      | Accede a
+      =< link_to 'myapp.com', new_user_session_url
+      |  con el usuario
+      strong
+        =< @admin.loginname
+      |  y la contraseña que nos has indicado.
+
+    p
+      | Una vez hayas entrado, lo primero que tienes que hacer es
+      =< link_to 'dar de alta tus empleados', admin_users_url
+      |  para que puedan empezar a fichar.<br>
+      | El usuario que te hemos creado es <strong>administrador</strong> y es <i>el único que puede crear a otros usuarios</i>, de perfil empleado o auditor.
+    p
+      | Una vez creados los usuarios, éstos pueden loguearse de dos formas:
+    ol
+      li
+        | Con su email (que es opcional y deberá ser único en toda la plataforma, es decir no puede estar en dos empresas a la vez)
+      li
+        | Con el nick de la empresa y el nick del usuario (modificable). Por ejemplo, en tu caso sería:
+        strong
+          =< @admin.loginname
+    p
+    | Esperamos vuestro feedback, especialmente en lo relativo a fallos del programa o sugerencias de mejora.<br>
+    strong
+      | Puedes contestar a este correo para ello.
+
+    p
+    p
+      | Recibe un cordial saludo:
+    p
+      | Tiago Ameller
+    p
+      | Menorca Zeros i Uns S.L.
+    p
+      | Soporte a clientes: 971352233 -
+      a[href="https://www.google.com/url?q=https://www.google.es/maps/place/Menorca%2BZeros%2Bi%2BUns%2BSL%2B-%2BSistema/@39.88716,4.2512713,17z/data%3D!3m1!4b1!4m5!3m4!1s0x129587eb4ead4ad7:0x5f0c06eb24a5299e!8m2!3d39.88716!4d4.25346"]
+        |  Font i Vidal 5A - 07703 Maó
+
+    p
+      | Programación:
+      a.c2[href="https://www.google.com/url?q=https://www.google.es/maps/place/CentreBit%2BMenorca/@39.933892,4.1471543,17z/data%3D!3m1!4b1!4m5!3m4!1s0x12be20cc8dc64919:0xcfb000f1d3d9a227!8m2!3d39.933892!4d4.149343"]
+        |  Centre Bit Menorca - 07730 Alaior
+    p
+      | Islas Baleares - España
+    p
+      | Síguenos en
+      a.c2[href="https://www.google.com/url?q=https://twitter.com/myappE"]
+        |  Twitter

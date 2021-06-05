@@ -1,0 +1,10 @@
+.container-fluid
+  .animated.fade-in
+    .card.card-accent-success
+      .card-header
+        h3.card-title
+          = icon_by_model(:user)
+          =< t('user.new_employee')
+          = link_to(admin_users_path, class: 'btn btn-outline-primary float-right') { coreui_icon_l('arrow-thick-left') }
+
+      == render 'form'

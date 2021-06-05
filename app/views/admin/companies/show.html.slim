@@ -1,0 +1,79 @@
+.container-fluid
+  .animated.fade-in
+    .card.card-accent-primary
+      .card-header
+        h3.card-title
+          = icon_by_model(:company)
+          =< @company.full_name
+          - unless @company.active?
+            span.badge.badge-danger.text-uppercase.ml-1 = t('attributes.inactive')
+          - if policy(:company).index?
+            = link_to(admin_companies_path, class: 'btn btn-outline-primary float-right') { coreui_icon_l('arrow-thick-left') }
+          - else
+            = link_to(root_path, class: 'btn btn-outline-primary float-right') { coreui_icon_l('arrow-thick-left') }
+      .card-body
+        - present(@company) do |company|
+          p
+            strong.text-capitalize = t('attributes.name')
+            =< company.name
+          p
+            strong.text-capitalize = t('attributes.nick')
+            =< company.nick
+          p
+            strong.text-capitalize = t('attributes.vat_number')
+            =< company.vat_number
+          p
+            strong.text-capitalize = t('attributes.address_one')
+            =< company.address_one
+          p
+            strong.text-capitalize = t('attributes.address_two')
+            =< company.address_two
+          p
+            strong.text-capitalize = t('attributes.city')
+            =< company.city
+          p
+            strong.text-capitalize = t('attributes.zip_code')
+            =< company.zip_code
+          p
+            strong.text-capitalize = t('attributes.state')
+            =< company.state
+          p
+            strong.text-capitalize = t('attributes.country')
+            =< company.country
+          p
+            strong.text-capitalize = t('attributes.email')
+            =< mail_to company.email
+          p
+            strong.text-capitalize = t('attributes.website')
+            =< link_to(company.website, company.website) if company.website.present?
+          p
+            strong.text-capitalize = t('attributes.phone')
+            =< company.phone
+
+          - if current_user.super_admin?
+            .card.card-accent-danger
+              .card-header
+                h4
+                  | Super admin area
+              .card-body
+                p
+                  strong.text-capitalize = t('attributes.id')
+                  =< company.id
+                p
+                  strong.text-capitalize = t('attributes.created_at')
+                  =< format_date_time company.created_at
+                p
+                  strong.text-capitalize = t('attributes.updated_at')
+                  =< format_date_time company.updated_at
+                = form_tag set_company_admin_user_path(current_user), method: :patch do
+                  = hidden_field_tag(:current_company, company.id)
+                  = submit_tag( \
+                    'admin this company', \
+                    class: 'btn btn-danger', \
+                    disabled: current_company.id == company.id, \
+                    data: { disable_with: '...', confirm: t('common.are_you_sure') } \
+                  )
+
+      .card-footer
+        = link_to(edit_admin_company_path(@company), class: 'btn btn-warning btn_edit') { coreui_icon_l(:pencil, class: 'mr-2') + t('common.edit') }
+        == render 'form_footer_buttons'

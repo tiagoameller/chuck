@@ -1,0 +1,44 @@
+.card.pt-0
+  .card-body
+    #entityImages.carousel.slide[data-ride="carousel"]
+      ol.carousel-indicators
+        - entity.images.each_with_index do |image, i|
+          = tag.li class: "#{'active' if i.zero?} #{dom_id(image)}", data: { target: '#entityImages', 'slide-to': i }
+      .carousel-inner.text-center
+        - entity.images.each_with_index do |image, i|
+          = tag.div(\
+            class: "carousel-item #{'active' if i.zero?} #{dom_id(image)}",\
+            data: {\
+              controller: 'partials--images'\
+            }) do
+            - if image.image?
+              = image_tag(\
+                image.variant(resize_to_limit: [900, 600]), \
+                class: "img-fluid #{dom_id(image)} zoom-in", \
+                width: 900,\
+                heigh: 600,\
+                data: {\
+                  'partials--images-target': 'small',\
+                  action: 'click->partials--images#expand',\
+                  original: url_for(image)\
+                }\
+              )
+              - if policy(policy).destroy_image?
+                .text-center.mt-0
+                  = button_to( \
+                    send(destroy_image_path, *destroy_image_params, image.id), \
+                    method: :delete, \
+                    remote: true, \
+                    class: "btn btn-danger btn-sm #{dom_id(image)} mt-1", \
+                    data: { confirm: t('common.are_you_sure') } \
+                  ) { coreui_icon_l(:trash) }
+    a.carousel-control-prev[href="#entityImages" role="button" data-slide="prev"]
+      span.carousel-control-prev-icon[aria-hidden="true"]
+      span.sr-only
+        = t 'common.previous'
+    a.carousel-control-next[href="#entityImages" role="button" data-slide="next"]
+      span.carousel-control-next-icon[aria-hidden="true"]
+      span.sr-only
+        = t 'common.next'
+    .mt-1
+      h6 = t 'image.hint', count: max_images

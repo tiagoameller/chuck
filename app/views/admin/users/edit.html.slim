@@ -1,0 +1,12 @@
+.container-fluid
+  .animated.fade-in
+    .card.card-accent-warning
+      .card-header
+        h3.card-title
+          = icon_by_model(:user)
+          =< @user.role_i18n
+          - unless @user.active?
+            span.badge.badge-danger.text-uppercase.ml-1 = t('attributes.inactive')
+          = link_to(admin_users_path, class: 'btn btn-outline-primary float-right') { coreui_icon_l('arrow-thick-left') }
+
+      == render 'form'

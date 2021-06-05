@@ -1,0 +1,31 @@
+= simple_form_for [:admin, @company] do |f|
+  = error_messages(@company)
+  .card-body
+    = f.input :name, autofocus: true
+    = f.input :vat_number
+    = f.input :address_one
+    = f.input :address_two
+    = f.input :city
+    = f.input :zip_code
+    = f.input :state
+    = f.input :country
+    = f.input :email
+    = f.input :website
+    = f.input :phone
+
+    - if current_user.super_admin?
+      .card.card-accent-danger
+        .card-header
+          h4
+            | Super admin area
+        .card-body
+
+  .card-footer
+    = f.submit(\
+      class: "btn btn-#{class_by_action}", \
+      data: { \
+        disable_with: t('common.saving'), \
+        'companies-target': 'submit'\
+      }\
+    )
+    == render 'form_footer_buttons'

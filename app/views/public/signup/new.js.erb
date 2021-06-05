@@ -1,0 +1,5 @@
+$("#remote_container").html("<%= j render 'form' %>")
+$("#company_form").on("shown.bs.modal", () => {
+  $("#company_name").trigger("focus")
+  $("#new_company").enableClientSideValidations()
+}).modal("show")

@@ -1,0 +1,5 @@
+$("#remote_container").html("<%= j render 'form' %>")
+$("#user_form").on("shown.coreui.modal", () => {
+  document.getElementById("user_name").focus()
+  $("form[data-client-side-validations]").enableClientSideValidations()
+}).modal("show")

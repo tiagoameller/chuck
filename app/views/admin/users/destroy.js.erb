@@ -1,0 +1,11 @@
+$("#user_form").modal("hide")
+
+var table = $("#users_table").DataTable()
+var tr = $("#<%= dom_id(@user) %>")
+var row = table.row(tr)
+row.remove().draw(false)
+App.common_controller.toast(
+  "",
+  "<%= I18n.t('controllers.destroyed', model_name: User.model_name.human) %>",
+  "notice"
+)

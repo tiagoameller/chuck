@@ -1,0 +1,30 @@
+.form-group
+  = form.label fieldname, class: 'form-label capitalize-first-word'
+  = content_tag(:div, id: "#{fieldname}_group", class: 'input-group date', data: { target_input: 'nearest' }) do
+    = form.text_field( \
+      fieldname, \
+      readonly: true, \
+      value: form.object.send(fieldname) ? form.object.send(fieldname).strftime('%a, %e/%m/%Y %k:%M') : nil, \
+      class: 'form-control datetimepicker-input', \
+      data: { target: "##{fieldname}_group"} \
+    )
+    = content_tag(:div, class: 'input-group-append', data: { target: "##{fieldname}_group", toggle: 'datetimepicker' })
+      .input-group-text
+        = coreui_icon_l :calendar
+
+javascript:
+   $(function () {
+     $("##{fieldname}_group").datetimepicker(
+       {
+         locale: 'es',
+         format: 'ddd, D/MM/YYYY HH:mm',
+         sideBySide: true,
+         ignoreReadonly: true,
+         buttons: {
+           showToday: true,
+           showClear: false,
+           showClose: true
+         }
+       }
+     );
+   });

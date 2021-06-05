@@ -1,0 +1,9 @@
+- unless creating?
+  - if policy(:company).destroy?
+    = link_to(admin_company_path(@company), \
+        class: 'btn btn-danger btn_delete ml-2', \
+        method: :delete, data: { confirm: t('common.are_you_sure'), disable_with: t('common.deleting') }) { coreui_icon_l(:trash)}
+- if policy(:company).index?
+  = link_to(admin_companies_path, class: 'btn btn-outline-primary float-right') { coreui_icon_l('arrow-thick-left') }
+- else
+  = link_to(root_path, class: 'btn btn-outline-primary float-right') { coreui_icon_l('arrow-thick-left') }

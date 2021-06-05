@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Styles>
+    <Style ss:ID="report_title">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+      <Font ss:Bold="1" ss:Italic="1" ss:Size="12"/>
+    </Style>
+    <Style ss:ID="column_header">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+      <Font ss:Bold="1"/>
+    </Style>
+    <Style ss:ID="total">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Center"/>
+      <Font ss:Bold="1"/>
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="<%= User.model_name.human(count: :many) %>">
+    <Table>
+      <Row>
+        <Cell ss:MergeAcross="7" ss:StyleID="report_title">
+          <Data ss:Type="String"><%= User.model_name.human(count: :many) %></Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell ss:StyleID="column_header"><Data ss:Type="String"><%= User.human_attribute_name(:username) %></Data></Cell>
+        <Cell ss:StyleID="column_header"><Data ss:Type="String"><%= User.human_attribute_name(:name) %></Data></Cell>
+        <Cell ss:StyleID="column_header"><Data ss:Type="String"><%= User.human_attribute_name(:phone) %></Data></Cell>
+        <Cell ss:StyleID="column_header"><Data ss:Type="String"><%= User.human_attribute_name(:email) %></Data></Cell>
+        <Cell ss:StyleID="column_header"><Data ss:Type="String"><%= User.human_attribute_name(:role) %></Data></Cell>
+        <Cell ss:StyleID="column_header"><Data ss:Type="String"><%= User.human_attribute_name(:active) %></Data></Cell>
+        <Cell ss:StyleID="column_header"><Data ss:Type="String"><%= User.human_attribute_name(:dark_theme) %></Data></Cell>
+        <Cell ss:StyleID="column_header"><Data ss:Type="String"><%= User.human_attribute_name(:comment) %></Data></Cell>
+      </Row>
+      <% @users.each do |model| %>
+        <% present(model) do |user| %>
+          <Row>
+            <Cell><Data ss:Type="String"><%= user.username %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.full_name %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.phone %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.email %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.role_i18n %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.active.humanize %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.dark_theme.humanize %></Data></Cell>
+            <Cell><Data ss:Type="String"><%= user.comment %></Data></Cell>
+          </Row>
+        <% end %>
+      <% end %>
+      <Row>
+        <Cell ss:StyleID="total">
+          <Data ss:Type="Number"><%= @users.count %></Data>
+        </Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+</Workbook>

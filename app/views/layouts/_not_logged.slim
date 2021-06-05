@@ -1,0 +1,20 @@
+= content_tag(\
+  :body, \
+  class: 'c-app', \
+  data: { \
+    action: action_name, \
+    env: Rails.env, \
+    controller: "shared--loader #{controller_name} #{controller_name}--#{controller_name}" \
+  }\
+) do
+  .c-wrapper
+    .c-body.flex-row.align-items-center
+      - if flash.any?
+        / sample of use with options
+        / = toast_messages position: '"bottomRight"'
+        = toast_messages
+
+      main.c-main
+        = yield
+    = render 'layouts/navigation/footer'
+#remote_container

@@ -1,0 +1,65 @@
+= content_tag(:div, data: { controller: 'punches--edit'} )
+  = form.label "#{label}: #{form.object.send("#{group}_duration")}", class: 'form-label font-weight-bold mr-2'
+  .form-inline
+    .form-row
+      .col-sm-5.col-xs-2.col-5.mb-2
+        = content_tag(:div, id: "#{group}_begin_group", class: 'input-group date', data: { target_input: 'nearest' }) do
+          = form.text_field( \
+            "#{group}_begin", \
+            value: form.object.send("#{group}_begin") ? form.object.send("#{group}_begin") : nil, \
+            class: 'form-control datetimepicker-input', \
+            data: { target: "##{group}_begin_group"}, \
+            autocomplete: "off" \
+          )
+          = content_tag(:div, class: 'input-group-append', data: { target: "##{group}_begin_group", toggle: 'datetimepicker' })
+            .input-group-text
+              = coreui_icon_l :calendar
+      .col-sm-5.col-xs-2.col-5.mb-2
+        = content_tag(:div, id: "#{group}_end_group", class: 'input-group date', data: { target_input: 'nearest' }) do
+          = form.text_field( \
+            "#{group}_end", \
+            value: form.object.send("#{group}_end") ? form.object.send("#{group}_end") : nil, \
+            class: 'form-control datetimepicker-input', \
+            data: { target: "##{group}_end_group"}, \
+            autocomplete: "off" \
+          )
+          = content_tag(:div, class: 'input-group-append', data: { target: "##{group}_end_group", toggle: 'datetimepicker' })
+            .input-group-text
+              = coreui_icon_l :calendar
+      .col-sm-2.col-xs-1.col-2.mb-1.mt-1
+        / .text-center
+        = content_tag(:div, class: 'btn btn-danger btn-sm btn-block', data: { action: 'click->punches--edit#clear', group: group })
+          = coreui_icon_l :trash
+
+javascript:
+   $(function () {
+     $("##{group}_begin_group").datetimepicker(
+       {
+         locale: 'es',
+         format: 'HH:mm',
+         sideBySide: true,
+         buttons: {
+           showToday: true,
+           showClear: false,
+           showClose: true
+         }
+       }
+     );
+     $("##{group}_end_group").datetimepicker(
+       {
+         locale: 'es',
+         format: 'HH:mm',
+         sideBySide: true,
+         buttons: {
+           showToday: true,
+           showClear: false,
+           showClose: true
+         }
+       }
+     );
+    // center input control in view port (soft keyboard hides it)
+    $('body').on('focusin', 'input, textarea', function(event) {
+      var scroll = $(this).offset();
+      window.scrollTo(0, scroll);
+    });
+  });

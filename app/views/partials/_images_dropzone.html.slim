@@ -1,0 +1,35 @@
+.card.pt-0 data-controller="shared--dropzone"
+  - if entity.images.attached?
+    .card-header
+      .row
+        - entity.images.each do |image|
+          .col-md-4.col-xs-1.mb-1
+            - if image.image?
+              .text-center
+                = image_tag image.variant(resize_to_limit: [300,200]), class: "img-fluid #{dom_id(image)}", width: 300, height: 200
+                - if policy(policy).destroy_image?
+                  p
+                    = link_to( \
+                      send(destroy_image_path, *destroy_image_params, image.id), \
+                      method: :delete, \
+                      remote: true, \
+                      class: "btn btn-danger btn-sm #{dom_id(image)} mt-1", \
+                      data: { confirm: t('common.are_you_sure') } \
+                    ) { coreui_icon_l(:trash) }
+      h6.mt-1 = t 'image.hint', count: max_images
+
+  - if policy(policy).edit_images?
+    .card-body
+      .field
+        #droparea.dropzone[
+          data-shared--dropzone-target="droparea"
+          data-imagecount="#{entity.images.count}"
+          data-max-images="#{max_images}"
+         ]
+          = form.file_field(\
+            :images, \
+            multiple: true, \
+            direct_upload: true, \
+             accept: 'image/*',\
+            data: { 'shared--dropzone-target': 'input' }\
+          )

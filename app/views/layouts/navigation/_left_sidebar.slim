@@ -1,0 +1,51 @@
+#sidebar.c-sidebar.c-sidebar-dark.c-sidebar-fixed.c-sidebar-lg-show
+  .c-sidebar-brand.d-md-down-none
+    = link_to root_path
+      img.c-sidebar-brand-full[width="118" height="46" alt="Application Logo" src="#{image_path('application/logo_46_white_text.png')}"]
+      img.c-sidebar-brand-minimized[width="46" height="46" alt="Application Logo" src="#{image_path('application/logo_46_white.png')}"]
+  ul.c-sidebar-nav.ps
+
+    li.c-sidebar-nav-title
+      = t('left_sidebar.files')
+    li.c-sidebar-nav-item
+    - if policy(:user).index?
+      li.c-sidebar-nav-item
+        = link_to admin_users_path, class: "c-sidebar-nav-link #{'c-active' if controller_name == 'users'}" do
+          = icon_by_model(:user, class: 'c-sidebar-nav-icon')
+          = User.model_name.human(count: :many)
+
+    - if current_user.at_least_admin?
+      li.c-sidebar-nav-title
+        = t('left_sidebar.admin')
+      - if policy(:company).show?
+        li.c-sidebar-nav-item
+          - if policy(:company).index?
+            = link_to admin_companies_path, class: "c-sidebar-nav-link #{'c-active' if controller_name == 'companies'}" do
+              = icon_by_model(:company, class: 'c-sidebar-nav-icon')
+              = Company.model_name.human(count: :many)
+          - else
+            = link_to admin_company_path(current_company), class: "c-sidebar-nav-link #{'c-active' if controller_name == 'companies'}" do
+              = icon_by_model(:company, class: 'c-sidebar-nav-icon')
+              = Company.model_name.human(count: 1)
+
+    li.c-sidebar-nav-title
+      = t 'left_sidebar.about'
+    li.c-sidebar-nav-item
+      a.c-sidebar-nav-link target='_blank' rel="noopener" href="mailto:#{SUPPORT_EMAIL}?subject=#{'Consulta técnica'.html_safe}&body=#{current_company.name+'. '+current_user.name.full.html_safe}"
+        = coreui_icon_l('envelope-closed', class: 'c-sidebar-nav-icon')
+        = t 'left_sidebar.support'
+    - if TWITTER_URL.present?
+      li.c-sidebar-nav-item
+        = link_to TWITTER_URL, class: 'c-sidebar-nav-link', target: '_blank', rel: 'noopener noreferrer' do
+          = coreui_icon_b('twitter', class: 'c-sidebar-nav-icon')
+          | Twitter
+    - if policy(:user).pricing?
+      li.c-sidebar-nav-item
+        = link_to page_path(:pricing), class: 'c-sidebar-nav-link' do
+          = coreui_icon_l('wallet', class: 'c-sidebar-nav-icon')
+          = t('pricing.title')
+    li.c-sidebar-nav-item
+      a.c-sidebar-nav-link.disabled
+        = coreui_icon_b('github', class: 'c-sidebar-nav-icon')
+        = $semver.to_s
+  button.c-sidebar-minimizer.c-class-toggler[type="button" data-target="_parent" data-class="c-sidebar-unfoldable" data-prokeyscachednode="false"]

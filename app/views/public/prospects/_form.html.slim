@@ -1,0 +1,43 @@
+#prospect_form.modal.fade
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      .modal-body
+        .card
+          .card-header
+            h2.card-title
+              / TODO: translate
+              | Solicitar acceso a myapp.com
+            .card-body data-controller="signup"
+              = simple_form_for [:public, @prospect], remote: true, validate: true do |f|
+                h4
+                  | Por favor, indíquenos unos pocos datos de su empresa
+                = f.error_notification
+                = f.input :company_name, autofocus: true, placeholder: 'EMPRESA DE EJEMPLO, S.L.'
+                = f.input :vat_number
+                = f.input :location, placeholder: 'Madrid, España'
+                = f.input :employee_count
+                = f.input :username, label: t('attributes.prospect_username'), placeholder: 'Juan García'
+                = f.input :email, label: t('attributes.prospect_email'), placeholder: 'juan@empresaejemplo.com'
+                .custom-control.custom-checkbox.mb-4
+                  input.custom-control-input[type="checkbox" id='xb_agree_terms' data-action="signup#acceptTerms"]
+                  label.custom-control-label[for="xb_agree_terms"]
+                    =< t('registrations.new.agree_to_terms')
+                    =< link_to t('common.terms'), page_path(:tos), target: '_blank'
+                = f.submit(\
+                  t('sessions.new.ask_access'), \
+                  class: "btn btn-danger btn-lg validable_form_submit btn-block", \
+                  disabled: true, \
+                  data: { \
+                    disable_with: t('common.saving'), \
+                    'signup-target': 'submit' \
+                  }\
+                )
+            .card-footer
+              .small
+                / TODO: tanslate
+                | De acuerdo con la normativa vigente, le informamos que sus datos serán utilizados solamente para crear una cuenta en
+                =< link_to 'myapp.com', root_path
+                | , que podrá cancelar en cualquier momento. Más información en las
+                =< link_to t('common.terms'), page_path(:tos), target: '_blank'
+                |  y en la
+                =< link_to t('privacy.privacy'), page_path(:privacy), target: '_blank'

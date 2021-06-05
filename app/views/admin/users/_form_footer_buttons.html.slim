@@ -1,0 +1,12 @@
+- unless creating?
+  - unless @user.default_admin?
+    = link_to(admin_user_path(@user), \
+        class: 'btn btn-danger btn_delete ml-2', \
+        method: :delete, \
+        remote: true, \
+        data: { \
+          confirm: t('common.are_you_sure'), \
+          disable_with: t('common.deleting') \
+        }\
+    ) { coreui_icon_l(:trash)}
+== render 'partials/dismiss_modal'

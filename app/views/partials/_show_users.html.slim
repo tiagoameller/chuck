@@ -1,0 +1,16 @@
+table.table.table-bordered.table-sm
+  thead
+    tr
+      th.text-capitalize = t('attributes.employee')
+      th.text-capitalize = t('attributes.hours')
+  tbody
+    - visit.users.order(:id).each do |user|
+      tr
+        td = user.user_name
+        td.text-right = user.hours
+  tfoot
+    tr
+      td
+      td.text-right
+        strong
+          = visit.hours

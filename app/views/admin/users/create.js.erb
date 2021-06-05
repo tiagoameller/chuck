@@ -1,0 +1,8 @@
+$("#user_form").modal("hide")
+$("#users_table").DataTable().row.add( <%= raw render_user(@user).to_json %> ).draw(false)
+
+App.common_controller.toast(
+  "",
+  "<%= I18n.t('controllers.created', model_name: User.model_name.human) %>",
+  "notice"
+)

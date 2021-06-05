@@ -1,0 +1,46 @@
+/
+/ deactivated, users must be CRUD by admins
+/ to activate, uncomment :registerable devise module on user model
+/
+.register-box.devise_box
+  .register-logo
+    img.img-circle.mr-2[src="#{image_path('application/logo_512_black.png')}" alt="Application Logo" style="opacity: .8"]
+    b
+      = link_to(APP_NAME, root_path)
+  .card
+    .card-body.register-box-body
+      p.login-box-msg
+        = t('registrations.new.register_new_user')
+      = simple_form_for(resource, \
+        as: resource_name, \
+        url: registration_path(resource_name), \
+        defaults: { \
+          label: false,
+          wrapper_html: { class: 'input-group mb-3' }, \
+          input_html: { class: 'form-control' } \
+        }) do |f|
+        div data-controller="public--signup"
+          = f.error_notification
+          = f.input :email, placeholder: t('attributes.email'), required: true
+          = f.input :username, placeholder: t('attributes.username'), required: true, autofocus: true, hint: t('registrations.edit.hints.username')
+          = render partial: 'partials/passwords', locals: { form: f }
+          .row
+            .col-8
+              .custom-control.custom-checkbox
+                input.custom-control-input[type="checkbox" id='xb_agree_terms' data-action="public--signup#accept_terms"]
+                label.custom-control-label[for="xb_agree_terms"]
+                  =< t('registrations.new.agree_to_terms')
+                  =< link_to t('common.terms'), page_path(:tos)
+            .col-4
+              = f.button(\
+                :submit, \
+                "Sign up", \
+                class: 'btn btn-primary btn-block btn-flat', \
+                type: 'submit', \
+                disabled: true, \
+                data: { \
+                  'public--signup-target': 'submit'\
+                }\
+              )
+      p.mb-1
+        = render "devise/shared/links"

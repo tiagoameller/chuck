@@ -1,0 +1,55 @@
+#company_form.modal.fade
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      .modal-body
+        .card
+          .card-header
+            h2.card-title
+              | Contratación myapp
+            .card-body data-controller="public--signup partials--passwords"
+              = simple_form_for [:public, @company], url: 'signup', remote: true, validate: true do |f|
+                h4 = "Plan: #{@paid_plan} para #{@user_count} usuarios"
+                h5 = "Precio: #{@price}"
+                = f.error_notification
+                = f.input :name, label: t('attributes.company_name'), autofocus: true
+                = f.input :vat_number
+                = f.input :admin_name
+                = f.input :email
+                = f.input(\
+                  :password, \
+                  wrapper: :vertical_form_password_view, \
+                  show_password_eye: true,\
+                  input_html: { \
+                    data: { \
+                      'partials--passwords-target': 'password'\
+                    } \
+                  }\
+                )
+                - if @paid
+                  .c-callout.c-callout-info
+                    | Puede completar sus datos fiscales y de pago una vez se haya registrado. No es necesario pagar nada ahora.
+                .custom-control.custom-checkbox.mb-4
+                  input.custom-control-input[type="checkbox" id='xb_agree_terms' data-action="public--signup#acceptTerms"]
+                  label.custom-control-label[for="xb_agree_terms"]
+                    =< t('registrations.new.agree_to_terms')
+                    =< link_to t('common.terms'), page_path(:tos), target: '_blank'
+                = f.hidden_field :paid_user_count
+                = f.hidden_field :paid_plan
+                = f.submit(\
+                  t('signup.register'), \
+                  class: "btn btn-danger btn-lg validable_form_submit btn-block", \
+                  disabled: true,\
+                  data: { \
+                    disable_with: t('common.saving'), \
+                    'public--signup-target': 'submit' \
+                  }\
+                )
+            .card-footer
+              .small
+                / TODO: tanslate
+                | De acuerdo con la normativa vigente, le informamos que sus datos serán utilizados solamente para crear una cuenta en
+                =< link_to 'myapp.com', root_path
+                | , que podrá cancelar en cualquier momento. Más información en las
+                =< link_to t('common.terms'), page_path(:tos), target: '_blank'
+                |  y en la
+                =< link_to t('privacy.privacy'), page_path(:privacy), target: '_blank'

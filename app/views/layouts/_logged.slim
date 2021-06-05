@@ -1,0 +1,23 @@
+= content_tag(\
+  :body, \
+  class: "c-app #{current_user&.dark_theme? ? 'c-dark-theme' : nil}", \
+  data: { \
+    action: action_name, \
+    env: Rails.env, \
+    controller: "shared--loader #{controller_name} #{controller_name}--#{controller_name} audits--last" \
+  }\
+) do
+  = render 'layouts/navigation/left_sidebar'
+  = render 'layouts/navigation/right_sidebar'
+  .c-wrapper
+    = render 'layouts/navigation/header'
+    .c-body data-action="click->shared--loader#closeRightSidebar"
+      - if flash.any?
+        / sample of use with options
+        / = toast_messages position: '"bottomRight"'
+        = toast_messages
+
+      main.c-main
+        = yield
+    = render 'layouts/navigation/footer'
+  #remote_container

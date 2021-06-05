@@ -22,10 +22,10 @@ $(document).bind("keydown", function (evt) {
 })
 
 // PWA
-if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('/service-worker.js', { scope: './' })
-                         .then(function(registration) {
-                          //  console.log('[Companion]', 'Service worker registered!')
-                          //  console.log(registration)
-                         })
-}
+// if (navigator.serviceWorker) {
+//   navigator.serviceWorker.register('/service-worker.js', { scope: './' })
+//                          .then(function(registration) {
+//                           //  console.log('[Companion]', 'Service worker registered!')
+//                           //  console.log(registration)
+//                          })
+// }

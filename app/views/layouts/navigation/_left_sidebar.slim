@@ -4,12 +4,6 @@
       img.c-sidebar-brand-full[width="118" height="46" alt="Application Logo" src="#{image_path('application/logo_46_white_text.png')}"]
       img.c-sidebar-brand-minimized[width="46" height="46" alt="Application Logo" src="#{image_path('application/logo_46_white.png')}"]
   ul.c-sidebar-nav.ps
-
-    li.c-sidebar-nav-title
-      = t('left_sidebar.files')
-
-    li.c-sidebar-nav-title
-      = t 'left_sidebar.about'
     li.c-sidebar-nav-item
       a.c-sidebar-nav-link target='_blank' rel="noopener" href="mailto:#{SUPPORT_EMAIL}"
         = coreui_icon_l('envelope-closed', class: 'c-sidebar-nav-icon')

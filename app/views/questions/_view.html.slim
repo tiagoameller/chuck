@@ -21,6 +21,13 @@
           .col-md-9
             = email_field_tag 'question[email]', nil, placeholder: t('question.email.placeholder'), class: 'form-control'
           .col-md-3
-            = submit_tag t('question.email.submit'), class: 'btn btn-danger', data: { disable_with: '...' }
+            = submit_tag(\
+              t('question.email.submit'), \
+              class: 'btn btn-danger', \
+              data: { \
+                disable_with: '...',\
+                confirm: I18n.t('common.are_you_sure')\
+              }\
+            )
             button.btn.btn-outline-info.float-right data-dismiss='modal'
               = coreui_icon_l('arrow-thick-left')

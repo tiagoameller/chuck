@@ -1,2 +1,29 @@
 ---
 en:
+  activerecord:
+    models:
+      answer:
+        one: Answer
+        other: Answers
+      question:
+        one: Question
+        other: Questions
+  attributes:
+    answer_count: answers
+    categories: categories
+    created_at: created_at
+    email: email
+    icon_url: icon
+    id: id
+    kind: type
+    question: question
+    question_id: question
+    updated_at: updated_at
+    url: ulr
+    value: text
+  enums:
+    question:
+      kind:
+        category: Category
+        random: Random
+        word: a word

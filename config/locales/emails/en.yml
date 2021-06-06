@@ -1,0 +1,11 @@
+---
+en:
+  emails:
+    answers:
+      body: Here you go!
+      subject: Chuck Norris send you their jokes
+    common:
+      brand: SaaS
+      mailto_subject: Related to %{customer_document_name}
+      sent_to: Email sent to %{customer}
+      unsubscribe: No more emails

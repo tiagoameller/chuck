@@ -21,33 +21,10 @@ header.c-header.c-header-light.c-header-fixed
     svg.c-icon.c-icon-lg
       use[xlink:href="#{image_path('svg/free.svg')}#cil-menu"]
 
-
-  ul.c-header-nav.mfs-auto
-    li.c-header-nav-item.px-3.c-d-legacy-none
-      button#header-tooltip.c-class-toggler.c-header-nav-btn[type="button" data-target="body" data-class="c-dark-theme"]
-        svg.c-icon.c-d-dark-none
-          use[xlink:href="#{image_path('svg/free.svg')}#cil-moon"]
-        svg.c-icon.c-d-default-none
-          use[xlink:href="#{image_path('svg/free.svg')}#cil-sun"]
-
   ul.c-header-nav
-    li.c-header-nav-item.dropdown
-      a.c-header-nav-link[data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"]
-        .c-avatar.mr-1.d-md-down-none
-        /   img.c-avatar-img[src="#{current_user.gravatar_url}" alt="#{current_user.email}"]
-        / span = current_user.loginname
-      .dropdown-menu.dropdown-menu-right.pt-0
-        .dropdown-header.text-center.text-uppercase
-          / = current_user.role_i18n
-        .dropdown-divider
-
-    / activate right side bar if needed
-    / button.c-header-toggler.c-class-toggler.mfe-md-3[
-    /   type="button"
-    /   data-target="#audit-sidebar"
-    /   data-class="c-sidebar-show"
-    /   data-action="click->audits--last#lastAudits"
-    / ]
-    /   = coreui_icon_l('history', class: 'c-icon c-icon-lg')
+    li.c-header-nav-item
+      = link_to('ES', set_language_spanish_path(turbolinks: false), remote: true, class: 'c-header-nav-link')
+    li.c-header-nav-item
+      = link_to('EN', set_language_english_path(turbolinks: false), remote: true, class: 'c-header-nav-link')
 
   = render 'layouts/navigation/subheader'

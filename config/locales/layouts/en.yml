@@ -1,12 +1,17 @@
 ---
 en:
   footer:
-    copyright: Copyright © 2021
+    copyright: 2021 © All rights reserved
     fecit: myapp
   left_sidebar:
-    about: Acerca de
+    about: About
+    admin: Admin
+    support: Support
+    dashboard:
+      title: Estadísticas
+      update: Actualizar
+      view: Ver
     files: Ficheros
     support: Soporte
     tos: Condiciones
-    pricacy: Privacidad
     users: Usuarios

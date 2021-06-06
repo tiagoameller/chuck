@@ -4,5 +4,8 @@ Rails.application.routes.draw do
     resources :answers, only: [:index]
   end
 
+  get 'set_language/spanish'
+  get 'set_language/english'
+
   root to: 'questions#index'
 end

@@ -1,2 +1,73 @@
 ---
 en:
+  actions:
+    create: creado
+    destroy: borrado
+    update: modificado
+  answer:
+    source: Ver en la web
+  common:
+    all: Todos
+    are_you_sure: "¿Está seguro?"
+    back: Volver
+    by: por
+    create: Crear
+    delete: Borrar
+    deleting: Borrando ...
+    edit: Modificar
+    home: Inicio
+    image: Imagen
+    images: Imágenes
+    login: Acceder
+    logout: Cerrar sesión
+    never: nunca
+    next: Siguiente
+    nil: Vacío
+    previous: Anterior
+    profile: Perfil
+    saving: Guardando ...
+    show: Ficha
+    signup: Registrarse
+    terms: Condiciones de uso
+    undefined: Sin definir
+    update: Actualizar
+    welcome: Página de inicio
+  errors:
+    messages:
+      not_saved:
+        one: 'Hay un error en el formulario, revise los datos:'
+        other: 'Hay %{count} errores en el formulario, revise los datos:'
+  flash:
+    alert: Atención
+    error: "¡Error!"
+    notice: Información
+    success: Correcto
+  meta:
+    author: Tiago Ameller
+    contact:
+      country_name: España
+      locality: Maó
+      postal_code: 07xxx
+      region: Islas Baleares
+      street_address: Fake street, 13
+    description: SaaS para lo que sea
+    site_name: myapp.com
+    title: myapp
+    url: https://myapp.com
+  question:
+    by_category: 'By category: ''%{category}'''
+    by_random: Random
+    by_word: 'By a word: ''%{word}'''
+    email:
+      error: Email cannot be blank
+      placeholder: Your email
+      sent: Send!
+      submit: Please, send
+    made_at: Created at %{when} with %{answers} answers
+    new:
+      by_category: Por categoría
+      by_random: Aleatorio
+      by_word: Por una palabra
+      reset: Reset
+      send: Enviar
+      title: Haz una pregunta

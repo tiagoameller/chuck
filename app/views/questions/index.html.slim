@@ -31,6 +31,7 @@
                         label.form-check-label[for='radio_by_category']
                           = t('question.new.by_category')
                         select.form-control[
+                          data-questions--index-target='selectByCategory'
                           data-action="change->questions--index#selectByCategory"
                         ]
                           option = 'animal'

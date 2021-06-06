@@ -12,63 +12,73 @@
       .card-body
         .row.justify-content-center
           .col-auto
-            .card
-              .card-title
-                h4.card-header
-                  = t('question.new.title')
-              .card-body
-                form.form-horizontal
+            = form_for @question, remote: true, class: 'form-horizontal' do |f|
+              .card.text-white.bg-info
+                .card-title
+                  h4.card-header
+                    = t('question.new.title')
+                .card-body
                   .row.form-group
                     .col-auto
-                      .form-check
-                        input.form-check-input[
-                          id='radio_by_category'
-                          type='radio'
-                          name='kind'
-                          checked='true'
-                          data-questions--index-target='radioByCategory'
-                        ]
+                      .form-check.mb-2
+                        = f.radio_button(\
+                          :kind, \
+                          :category, \
+                          class: 'form-check-input',\
+                          checked: true,\
+                          data: {\
+                            'questions--index-target': 'radioByCategory'\
+                          }\
+                        )
                         label.form-check-label[for='radio_by_category']
                           = t('question.new.by_category')
-                        select.form-control[
-                          data-questions--index-target='selectByCategory'
-                          data-action="change->questions--index#selectByCategory"
-                        ]
-                          option = 'animal'
-                          option = 'carrer'
-                          option = 'celebrity'
-                          option = 'dev'
+                        = select_tag(\
+                          'question[category]',\
+                          [],\
+                          class: 'form-control',\
+                          data: {\
+                            'questions--index-target': 'selectByCategory',\
+                            'action': "change->questions--index#selectByCategory"\
+                          }\
+                        )
 
-                      .form-check
-                        input.form-check-input[
-                          id='radio_by_word'
-                          type='radio'
-                          name='kind'
-                          data-questions--index-target='radioByWord'
-                        ]
+                      .form-check.mb-2
+                        = f.radio_button(\
+                          :kind,\
+                          :word,\
+                          class: 'form-check-input',\
+                          data: {\
+                            'questions--index-target': 'radioByWord'\
+                          }\
+                        )
                         label.form-check-label[for='radio_by_word']
                           = t('question.new.by_word')
-                        input.form-control[
-                          type='text'
-                          data-questions--index-target='textByWord'
-                          data-action="input->questions--index#selectByWord"
-                      ]
+                        = f.text_field(\
+                          :question,\
+                          class: 'form-control',\
+                          data: {\
+                            'questions--index-target': 'textByWord',\
+                            'action': "input->questions--index#selectByWord"\
+                          }\
+                        )
 
-                      .form-check
-                        input.form-check-input[
-                          id='radio_by_random'
-                          type='radio'
-                          name='kind'
-                          data-questions--index-target='radioByRandom'
-                        ]
+                      .form-check.mb-2
+                        = f.radio_button(\
+                          :kind,\
+                          :random,\
+                          class: 'form-check-input',\
+                          data: {\
+                            'questions--index-target': 'radioByRandom'\
+                          }\
+                        )
                         label.form-check-label[for='radio_by_random']
                           = t('question.new.by_random')
-              .card-footer
-                .float-right
-                  button.btn-primary.mr-2[type='submit']
-                    = t('question.new.send')
-                  button.btn-danger[type='reset' data-action='click->questions--index#reset']
-                    = t('question.new.reset')
+                .card-footer.bg-info
+                  .float-right
+                    = f.submit t('question.new.send'), class: 'btn-primary mr-2'
+                    button.btn-danger[type='reset' data-action='click->questions--index#reset']
+                      = t('question.new.reset')
+
         .row.justify-content-center
           .col-auto
             = content_tag( \

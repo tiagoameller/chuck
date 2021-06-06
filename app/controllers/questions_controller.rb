@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html
+      format.html { @question = Question.new }
       format.json { render json: QuestionsDatatable.new(view_context) }
     end
   end
@@ -12,27 +12,32 @@ class QuestionsController < ApplicationController
   # GET /questions/1.json
   def show; end
 
-  # GET /questions/new
-  def new
-    @question = Question.new
-  end
-
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(question_params)
+    @question = make_question
     respond_to do |format|
       if @question.save
-        # format.html { redirect_to question_path(@question), notice: I18n.t('controllers.created', model_name: Question.model_name.human) }
         format.js
       else
-        # format.html { render :new }
         format.js { render partial: 'toasts/errors', locals: { instance: @question } }
       end
     end
   end
 
   private
+
+  def make_question
+    Question.new.tap do |result|
+      result.kind = question_params['kind']
+      case result.kind.to_sym
+      when :category
+        result.question = question_params['category']
+      when :word
+        result.question = question_params['question']
+      end
+    end
+  end
 
   def set_question
     @question = Question.find(params[:id])
@@ -43,6 +48,7 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(
       :kind,
+      :category,
       :question
     )
   end

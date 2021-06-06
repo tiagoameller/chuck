@@ -2,97 +2,91 @@
   / avoid reloading when questions moves back and forth (because turbolinks)
   meta[name="turbolinks-cache-control" content="no-cache"]
 
-.container-fluid [data-controller="questions--index"]
+.container-fluid.bg-white.py-3 [data-controller="questions--index"]
   .animated.fade-in
-    .card.card-accent-primary
-      .card-header
-        h2
-          = icon_by_model :question
-          =< Question.model_name.human(count: :many)
-      .card-body
-        .row.justify-content-center
-          .col-auto
-            = form_for @question, remote: true, class: 'form-horizontal' do |f|
-              .card.text-white.bg-info
-                .card-title
-                  h4.card-header
-                    = t('question.new.title')
-                .card-body
-                  .row.form-group
-                    .col-auto
-                      .form-check.mb-2
-                        = f.radio_button(\
-                          :kind, \
-                          :category, \
-                          class: 'form-check-input',\
-                          checked: true,\
-                          data: {\
-                            'questions--index-target': 'radioByCategory'\
-                          }\
-                        )
-                        label.form-check-label[for='radio_by_category']
-                          = t('question.new.by_category')
-                        = select_tag(\
-                          'question[category]',\
-                          [],\
-                          class: 'form-control',\
-                          data: {\
-                            'questions--index-target': 'selectByCategory',\
-                            'action': "change->questions--index#selectByCategory",\
-                            'categories-url': "#{Question::API_URL}/categories"\
-                          }\
-                        )
+    .row.justify-content-center
+      .col-auto
+        = form_for @question, remote: true, class: 'form-horizontal' do |f|
+          .card.text-white.bg-info
+            .card-title
+              h4.card-header
+                = t('question.new.title')
+            .card-body.py-0
+              .row.form-group
+                .col-auto
+                  .form-check.mb-2
+                    = f.radio_button(\
+                      :kind, \
+                      :category, \
+                      class: 'form-check-input',\
+                      checked: true,\
+                      data: {\
+                        'questions--index-target': 'radioByCategory'\
+                      }\
+                    )
+                    label.form-check-label[for='radio_by_category']
+                      = t('question.new.by_category')
+                    = select_tag(\
+                      'question[category]',\
+                      [],\
+                      class: 'form-control',\
+                      data: {\
+                        'questions--index-target': 'selectByCategory',\
+                        'action': "change->questions--index#selectByCategory",\
+                        'categories-url': "#{Question::API_URL}/categories"\
+                      }\
+                    )
 
-                      .form-check.mb-2
-                        = f.radio_button(\
-                          :kind,\
-                          :word,\
-                          class: 'form-check-input',\
-                          data: {\
-                            'questions--index-target': 'radioByWord'\
-                          }\
-                        )
-                        label.form-check-label[for='radio_by_word']
-                          = t('question.new.by_word')
-                        = f.text_field(\
-                          :question,\
-                          class: 'form-control',\
-                          data: {\
-                            'questions--index-target': 'textByWord',\
-                            'action': "input->questions--index#selectByWord"\
-                          }\
-                        )
+                  .form-check.mb-2
+                    = f.radio_button(\
+                      :kind,\
+                      :word,\
+                      class: 'form-check-input',\
+                      data: {\
+                        'questions--index-target': 'radioByWord'\
+                      }\
+                    )
+                    label.form-check-label[for='radio_by_word']
+                      = t('question.new.by_word')
+                    = f.text_field(\
+                      :question,\
+                      class: 'form-control',\
+                      data: {\
+                        'questions--index-target': 'textByWord',\
+                        'action': "input->questions--index#selectByWord"\
+                      }\
+                    )
 
-                      .form-check.mb-2
-                        = f.radio_button(\
-                          :kind,\
-                          :random,\
-                          class: 'form-check-input',\
-                          data: {\
-                            'questions--index-target': 'radioByRandom'\
-                          }\
-                        )
-                        label.form-check-label[for='radio_by_random']
-                          = t('question.new.by_random')
-                .card-footer.bg-info
-                  .float-right
-                    = f.submit t('question.new.send'), class: 'btn-primary mr-2'
-                    button.btn-danger[type='reset' data-action='click->questions--index#reset']
-                      = t('question.new.reset')
+                  .form-check
+                    = f.radio_button(\
+                      :kind,\
+                      :random,\
+                      class: 'form-check-input',\
+                      data: {\
+                        'questions--index-target': 'radioByRandom'\
+                      }\
+                    )
+                    label.form-check-label[for='radio_by_random']
+                      = t('question.new.by_random')
+            .card-footer.bg-info
+              .float-right
+                = f.submit t('question.new.send'), class: 'btn-primary mr-2'
+                button.btn-danger[type='reset' data-action='click->questions--index#reset']
+                  = t('question.new.reset')
 
-        .row.justify-content-center
-          .col-auto
-            = content_tag( \
-              :table, \
-              id: 'questions_table', \
-              class: 'table table-responsive-sm table-bordered table-hover w-100', \
-              data: { \
-                url: questions_path(format: :json) \
-              } \
-            )
-              thead
-                tr
-                  th.text-capitalize = t('attributes.kind')
-                  th.text-capitalize = t('attributes.question')
-                  th.text-capitalize = t('attributes.created_at')
-                  th.text-capitalize = t('attributes.answer_count')
+    .row.justify-content-center
+      .col-auto
+        = content_tag( \
+          :table, \
+          id: 'questions_table', \
+          class: 'table table-responsive-sm table-bordered table-hover w-100', \
+          data: { \
+            url: questions_path(format: :json) \
+          } \
+        )
+          thead
+            tr
+              th.text-capitalize = t('attributes.kind')
+              th.text-capitalize = t('attributes.question')
+              th.text-capitalize = t('attributes.created_at')
+              th.text-capitalize = t('attributes.answer_count')

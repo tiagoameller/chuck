@@ -1,0 +1,8 @@
+row
+  columns
+    p.text-center
+      = t('emails.answers.body')
+    p
+      - @question.answers.each do |answer|
+        = answer.value
+        hr

@@ -39,18 +39,3 @@ html[xmlns='http://www.w3.org/1999/xhtml']
             tr
               td.wrapper-inner
                 = yield
-      hr
-      row.footer
-        columns
-          spacer size="16"
-          h6.text-center style="margin-bottom: 0"
-            = t 'emails.common.brand'
-          p.text-center
-            small
-              a href="#{page_url(:privacy)}"
-                |  Política de privacidad
-              |  |
-              a href="#{root_url}"
-                |  myapp.com
-              |  |
-              / =< link_to t('emails.common.unsubscribe'), unsubscribe_public_prospects_url(email: @recipient)

@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show]
+  before_action :set_question, only: [:show, :send_email]
 
   def index
     respond_to do |format|
@@ -26,6 +26,18 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def send_email
+    respond_to do |format|
+      @email = question_params['email']
+      if @email.blank?
+        @question.errors.add(:email, I18n.t('question.email.error'))
+        format.js { render partial: 'toasts/errors', locals: { instance: @question } }
+      else
+        format.js { UserMailer.answers(@question, @email).deliver_now }
+      end
+    end
+  end
+
   private
 
   def set_question
@@ -38,7 +50,8 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(
       :kind,
       :category,
-      :question
+      :question,
+      :email
     )
   end
 end

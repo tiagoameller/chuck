@@ -12,6 +12,7 @@ es:
     answer_count: respuestas
     categories: categorías
     created_at: creación
+    email: email
     icon_url: icono
     id: identificador
     kind: tipo

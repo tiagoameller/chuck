@@ -96,6 +96,11 @@ es:
     by_category: 'Por categoría: ''%{category}'''
     by_random: Aleatorio
     by_word: 'Por una palabra: ''%{word}'''
+    email:
+      error: El email no puede estar en blanco
+      placeholder: Pon tu email para recibir una copia
+      sent: Enviado!
+      submit: Envíamelo
     made_at: Realizada en %{when} con %{answers} respuestas
     new:
       by_category: Por categoría

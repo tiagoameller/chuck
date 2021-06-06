@@ -5,7 +5,7 @@ module MailerSupport
   end
 
   included do
-    default from: 'myapp <info@sistemasc.net>'
+    default from: 'Chuck Noriis <tiago.ameller@gmail.com>'
     layout 'mailer'
     helper ApplicationHelper
 

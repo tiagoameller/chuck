@@ -10,6 +10,7 @@
 #  updated_at   :datetime         not null
 #
 class Question < ApplicationRecord
+  include ChuckNorrisApi
   has_many :answers, dependent: :destroy
 
   enum kind: { category: 0, word: 1, random: 2 }

@@ -2,9 +2,3 @@ $("#questions_table").DataTable().row.add( <%= raw render_question(@question).to
 
 document.getElementById("remote_container").innerHTML = "<%= j render 'show' %>"
 new coreui.Modal(document.getElementById("question_form")).show()
-
-// App.common_controller.toast(
-//   "",
-//   "<%= I18n.t('controllers.created', model_name: Question.model_name.human) %>",
-//   "notice"
-// )

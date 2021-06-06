@@ -14,8 +14,8 @@
         - present(an_answer) do |answer|
           .card
             .card-body.p-1.d-flex.align-items-center
-              .bg-gradient-primary.p-3.mfe-3
-                i.c-icon.c-icon-xl.cil-settings
+              .bg-light.p-3.mfe-3
+                img[src="#{answer.icon_url}" alt='chuck avatar']
               ul.list-unstyled
                 li.text-value.text-primary
                   = answer.value

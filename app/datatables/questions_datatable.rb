@@ -1,16 +1,13 @@
 class QuestionsDatatable < ApplicationDatatable
   SORT_COLUMNS = [
-    'questions.created_at',
     'questions.kind',
     'questions.question',
+    'questions.created_at',
     'questions.answer_count'
   ].freeze
 
   SEARCH_COLUMNS = [
-    'questions.created_at',
-    'questions.kind',
-    'questions.question',
-    'questions.answer_count'
+    'questions.question'
   ].freeze
 
   private
@@ -28,7 +25,7 @@ class QuestionsDatatable < ApplicationDatatable
   end
 
   def total_entries
-    questions.count
+    questions.total_count
   end
 
   def questions
@@ -47,7 +44,7 @@ class QuestionsDatatable < ApplicationDatatable
     else
       search_string = []
       SEARCH_COLUMNS.each { |term| search_string << "cast(#{term} as varchar) ilike :search" }
-      Question.where(search_string.join(' or '), search: "%#{search_value}%")
+      questions.where(search_string.join(' or '), search: "%#{search_value}%")
     end
   end
 end

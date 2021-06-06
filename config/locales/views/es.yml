@@ -5,7 +5,7 @@ es:
     destroy: borrado
     update: modificado
   answer:
-    source: Ir a la fuente
+    source: Ver en la web
   audit:
     no_activity: Sin actividad
     one: Evento
@@ -93,9 +93,9 @@ es:
   privacy:
     privacy: Privacidad
   question:
-    by_category: Por categoría '%{category}'
+    by_category: 'Por categoría: ''%{category}'''
     by_random: Aleatorio
-    by_word: Por texto '%{word}
+    by_word: 'Por una palabra: ''%{word}'''
     made_at: Realizada en %{when} con %{answers} respuestas
   registrations:
     edit:

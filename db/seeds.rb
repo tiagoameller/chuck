@@ -17,6 +17,7 @@ begin
           answers << {
             categories: Faker::Lorem.words(number: j).join('|'),
             url: Faker::Internet.url,
+            icon_url: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
             value: Faker::Lorem.sentence
           }
         end

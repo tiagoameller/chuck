@@ -7,7 +7,7 @@ export class QuestionsDatatable extends DatatableInit {
   constructor () {
     let columndefs = [
       {
-        targets: [0],
+        targets: [2],
         className: "text-center",
       },
       {
@@ -16,7 +16,7 @@ export class QuestionsDatatable extends DatatableInit {
       }
     ]
     let options = Object.assign({}, DEFAULT_OPTIONS)
-    options.order = [[0, "desc"]]
+    options.order = [[2, "desc"]]
     super("questions_table", columndefs, options)
   }
 }

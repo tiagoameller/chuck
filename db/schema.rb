@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_154520) do
     t.bigint "question_id", null: false
     t.string "categories"
     t.string "url"
+    t.string "icon_url"
     t.text "value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 2021_06_05_154520) do
     t.integer "answer_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at"], name: "index_questions_on_created_at", order: :desc
   end
 
   add_foreign_key "answers", "questions"

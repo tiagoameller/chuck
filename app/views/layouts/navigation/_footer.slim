@@ -2,16 +2,3 @@ footer.c-footer
   .float-left
     = APP_CREATOR
     =< t('footer.copyright')
-
-  .mx-auto.d-none.d-lg-block
-    = link_to "mailto:#{SUPPORT_EMAIL}" do
-      i.c-icon.c-icon-xl.cil-envelope-closed.ml-3
-    - if TWITTER_URL.present?
-      = link_to TWITTER_URL do
-        i.c-icon.c-icon-xl.cib-twitter.ml-3
-
-  .float-right
-    .nav
-      / = link_to t('privacy.privacy'), page_path(:privacy), class: 'nav-link'
-      / = link_to t('cookies.cookies'), page_path(:cookies), class: 'nav-link'
-      / = link_to t('tos.tos'), page_path(:tos), class: 'nav-link'

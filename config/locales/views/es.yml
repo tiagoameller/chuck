@@ -97,6 +97,13 @@ es:
     by_random: Aleatorio
     by_word: 'Por una palabra: ''%{word}'''
     made_at: Realizada en %{when} con %{answers} respuestas
+    new:
+      title: Haz una pregunta
+      by_category: Por categoría
+      by_random: Aleatorio
+      by_word: Por una palabra
+      send: Enviar
+      reset: Reset
   registrations:
     edit:
       hints:

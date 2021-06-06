@@ -19,7 +19,7 @@ export default class QuestionsIndex extends ApplicationController {
 
   fillCategorySelect () {
     self = this
-    const url = "https://api.chucknorris.io/jokes/categories"
+    const url = this.selectByCategoryTarget.getAttribute('data-categories-url')
     const request = new XMLHttpRequest()
     request.error = () => self.loadCategoriesError()
     request.onload = (result) => {

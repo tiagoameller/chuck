@@ -8,12 +8,8 @@ class QuestionsController < ApplicationController
     end
   end
 
-  # GET /questions/1
-  # GET /questions/1.json
   def show; end
 
-  # POST /questions
-  # POST /questions.json
   def create
     @question = create_cuestion_from_api
     respond_to do |format|

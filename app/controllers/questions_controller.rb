@@ -8,7 +8,12 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    respond_to do |format|
+      format.js
+      format.json { render json: AnswersDatatable.new(@question, view_context) }
+    end
+  end
 
   def create
     @question = Question.new_from_params(question_params)

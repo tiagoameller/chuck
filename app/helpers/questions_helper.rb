@@ -1,8 +1,8 @@
 module QuestionsHelper
   def render_question(model)
-    [].tap do |column|
+    [].tap do |row|
       present(model) do |question|
-        column << link_to(
+        row << link_to(
           question.kind_i18n,
           question_path(question),
           remote: true,
@@ -10,8 +10,8 @@ module QuestionsHelper
             id: question.id
           }
         )
-        column << question.question_for_display
-        column << tag.div(
+        row << question.question_for_display
+        row << tag.div(
           question.created_at_in_words,
           data: {
             toggle: 'c-tooltip',
@@ -19,8 +19,8 @@ module QuestionsHelper
             title: question.created_at_formatted
           }
         )
-        column << question.answer_count
-        column << {
+        row << question.answer_count
+        row << {
           row_id: dom_id(question)
         }
       end

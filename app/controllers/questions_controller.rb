@@ -15,9 +15,9 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @question = make_question
+    @question = create_cuestion_from_api
     respond_to do |format|
-      if @question.save
+      if @question.persisted?
         format.js
       else
         format.js { render partial: 'toasts/errors', locals: { instance: @question } }
@@ -27,14 +27,50 @@ class QuestionsController < ApplicationController
 
   private
 
-  def make_question
+  def create_cuestion_from_api
     Question.new.tap do |result|
-      result.kind = question_params['kind']
-      case result.kind.to_sym
+      request_params = prepare_request
+      response = HTTParty.get(request_params[:url], format: :plain)
+      if response.code == 200
+        result.kind = request_params[:kind]
+        result.question = request_params[:question]
+        answers = JSON.parse(response, symbolize_names: true)
+        result.answer_count = answers[:total] || 1
+        add_answers_to_question(result, answers[:result] || [answers]) if result.save
+      else
+        result.errors.add(:base, 'Something failed while retrieving your question')
+      end
+    end
+  end
+
+  def add_answers_to_question(question, answers)
+    question.answers.create(
+      [].tap do |result|
+        answers.each do |answer|
+          result << {
+            categories: answer[:categories].join('|'),
+            url: answer[:url],
+            icon_url: answer[:icon_url],
+            value: answer[:value]
+          }
+        end
+      end
+    )
+  end
+
+  def prepare_request
+    {}.tap do |result|
+      result[:kind] = question_params['kind']
+      case result[:kind].to_sym
       when :category
-        result.question = question_params['category']
+        result[:question] = question_params['category']
+        result[:url] = "#{API_URL}/random?category=#{result[:question]}"
       when :word
-        result.question = question_params['question']
+        result[:question] = question_params['question']
+        result[:url] = "#{API_URL}/search?query=#{result[:question]}"
+      when :random
+        result[:question] = nil
+        result[:url] = "#{API_URL}/random"
       end
     end
   end

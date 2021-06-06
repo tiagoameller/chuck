@@ -208,6 +208,9 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    httparty (0.18.1)
+      mime-types (~> 3.0)
+      multi_xml (>= 0.5.2)
     httpi (2.4.5)
       rack
       socksify
@@ -272,6 +275,7 @@ GEM
     mini_portile2 (2.5.3)
     minitest (5.14.4)
     msgpack (1.4.2)
+    multi_xml (0.6.0)
     name_of_person (1.1.1)
       activesupport (>= 5.2.0)
     net-scp (3.0.0)
@@ -549,6 +553,7 @@ DEPENDENCIES
   fuubar
   gravtastic
   high_voltage
+  httparty
   humanize_boolean
   i18n-js
   i18n-tasks
@@ -584,7 +589,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen
   turbolinks (~> 5)
-  tzinfo-data
   valvat
   web-console (>= 4.1.0)
   webdrivers

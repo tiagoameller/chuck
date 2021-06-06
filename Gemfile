@@ -52,8 +52,6 @@ group :test do
   gem 'webdrivers'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'rails-i18n'
 gem 'friendly_id'
 gem 'kaminari'
@@ -89,6 +87,7 @@ gem 'capistrano'
 gem 'capistrano-passenger'
 gem 'capistrano-rails'
 gem 'capistrano-rbenv'
+gem 'httparty'
 
 group :development, :test do
   gem 'faker'
@@ -97,7 +96,6 @@ group :development, :test do
   gem 'debase'
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'rails-controller-testing'
   gem 'ruby-debug-ide'
   gem 'shoulda-matchers'
 end
@@ -108,6 +106,7 @@ group :development do
   gem 'rubocop-rails'
   gem 'spring-watcher-listen'
   gem 'i18n-tasks'
+  gem 'rubocop-rspec'
 end
 
 group :test do
@@ -115,7 +114,7 @@ group :test do
   gem 'fuubar'
   gem 'simplecov', require: false
   gem 'apparition'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
-gem 'rspec-rails', group: [:development, :test]
-gem 'rubocop-rspec'
-gem 'factory_bot_rails', group: [:development, :test]
